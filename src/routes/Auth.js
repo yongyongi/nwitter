@@ -1,7 +1,10 @@
 import {
   authService,
   createUserWithEmailAndPassword,
+  googleProvider,
   signInWithEmailAndPassword,
+  signInWithPopup,
+  githubProvider,
 } from "fbase";
 import React, { useState } from "react";
 
@@ -49,6 +52,15 @@ const Auth = () => {
 
   // 실행시마다 NewAccount 값이 반대로 바뀜(true, false)
   const toggleAccount = () => setNewAccount((prev) => !prev);
+  const socialClick = async (e) => {
+    const {
+      target: { name },
+    } = e;
+    if (name === "google") await signInWithPopup(authService, googleProvider);
+    else if (name === "github")
+      await signInWithPopup(authService, githubProvider);
+  };
+
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -78,8 +90,12 @@ const Auth = () => {
         {newAccount ? "Sign In" : "Create Account"}
       </button>
       <div>
-        <button>Continue with Google</button>
-        <button>Continue with Github</button>
+        <button name="google" onClick={socialClick}>
+          Continue with Google
+        </button>
+        <button name="github" onClick={socialClick}>
+          Continue with Github
+        </button>
       </div>
     </div>
   );

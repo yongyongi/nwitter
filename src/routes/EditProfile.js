@@ -1,4 +1,4 @@
 import React from "react";
 
-const EditPorfile = () => <span>EditPorfile</span>;
+const EditProfile = () => <span>EditPorfile</span>;
 export default EditProfile;
