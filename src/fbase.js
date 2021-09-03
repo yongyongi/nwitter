@@ -6,6 +6,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   GithubAuthProvider,
+  signOut,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -29,4 +30,5 @@ export {
   googleProvider,
   signInWithPopup,
   githubProvider,
+  signOut,
 };

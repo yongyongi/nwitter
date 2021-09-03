@@ -1,6 +1,7 @@
 import AppRouter from "components/Route";
 import React, { useEffect, useState } from "react";
 import { authService } from "fbase";
+import Navigation from "components/Navigation";
 
 function App() {
   // 유저 로그인 유무

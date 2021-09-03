@@ -3,15 +3,23 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Auth from "routes/Auth";
 import Home from "routes/Home";
+import Profile from "routes/Profile";
+import Navigation from "components/Navigation";
 
 const AppRouter = ({ isLogin }) => {
   return (
     <Router>
-      <Switch>
+      {isLogin && <Navigation /> /* Login되었을때만 Navigation이 실행됌  */}
+      <Switch /*Switch는 첫번째 매칭 되는 라우터만 실행하게 해준다. */>
         {isLogin ? (
-          <Route exact path="/">
-            <Home />
-          </Route>
+          <>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/profile">
+              <Profile />
+            </Route>
+          </>
         ) : (
           <Route exact path="/">
             <Auth />
