@@ -9,18 +9,25 @@ function App() {
   // useEffect에서 데이터를 가져오기 전까지의 상태를 초기화한다.
   // Login확인 유무를 기다리는 로딩이라고 생각하면 될 것 같다.
   const [init, setInit] = useState(false);
+  const [userObject, setUserObject] = useState("");
 
   useEffect(() => {
     // 이 작업은 바로 되지 않고 조금의 시간이 걸린다.
     authService.onAuthStateChanged((user) => {
-      if (user) setIsLogin(true);
-      else setIsLogin(false);
+      if (user) {
+        setIsLogin(true);
+        setUserObject(user);
+      } else setIsLogin(false);
       setInit(true);
     });
   }, []);
   return (
     <>
-      {init ? <AppRouter isLogin={isLogin} /> : "initalization"}
+      {init ? (
+        <AppRouter isLogin={isLogin} userObj={userObject} />
+      ) : (
+        "initalization"
+      )}
       <footer>&copy; {new Date().getFullYear()} Nwitter</footer>
     </>
   );

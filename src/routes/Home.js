@@ -1,21 +1,19 @@
+import Nweet from "components/Nweet";
 import { db } from "fbase";
 import {
   addDoc,
   collection,
-  getDocs,
   query,
-  where,
   onSnapshot,
   orderBy,
-  quer,
 } from "firebase/firestore";
 
 import React, { useEffect, useState } from "react";
 
-const Home = () => {
+const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
   const [nweets, setNweets] = useState([]);
-
+  // 데이터 실시간 조회
   useEffect(() => {
     // const querySnapshot = await getDocs(collection(db, "nweets"));
     // querySnapshot.forEach((doc) => {
@@ -38,9 +36,10 @@ const Home = () => {
     });
 
     return () => {
-      unsubscribe();
+      unsubscribe(); //불필요한 통신을 끊기 위해서 => 좀 더 찾아보기
     };
   }, []);
+
   const onChange = (e) => {
     const {
       target: { value },
@@ -48,15 +47,17 @@ const Home = () => {
     setNweet(value);
   };
 
+  // 데이터 생성
   const onSubmit = async (e) => {
     e.preventDefault();
     await addDoc(collection(db, "nweets"), {
       nweet,
       createdAt: Date.now(),
+      creatorId: userObj.uid,
     });
     setNweet("");
   };
-  console.log(nweets);
+
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -69,12 +70,15 @@ const Home = () => {
         />
         <input type="submit" value="nweet" />
       </form>
-
-      {nweets.map((nweet) => (
-        <div key={nweet.id}>
-          <h4>{nweet.nweet}</h4>
-        </div>
-      ))}
+      <div>
+        {nweets.map((nweet) => (
+          <Nweet
+            key={nweet.id}
+            nweetObj={nweet}
+            isOwner={nweet.creatorId === userObj.uid} // 내가 쓴 댓글을 boolean값으로 전달해준다.
+          />
+        ))}
+      </div>
     </>
   );
 };

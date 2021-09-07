@@ -6,7 +6,7 @@ import Home from "routes/Home";
 import Profile from "routes/Profile";
 import Navigation from "components/Navigation";
 
-const AppRouter = ({ isLogin }) => {
+const AppRouter = ({ isLogin, userObj }) => {
   return (
     <Router>
       {isLogin && <Navigation /> /* Login되었을때만 Navigation이 실행됌  */}
@@ -14,7 +14,7 @@ const AppRouter = ({ isLogin }) => {
         {isLogin ? (
           <>
             <Route exact path="/">
-              <Home />
+              <Home userObj={userObj} />
             </Route>
             <Route exact path="/profile">
               <Profile />
