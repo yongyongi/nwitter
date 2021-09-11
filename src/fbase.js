@@ -8,7 +8,8 @@ import {
   GithubAuthProvider,
   signOut,
 } from "firebase/auth";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -34,3 +35,4 @@ export {
   signOut,
 };
 export const db = getFirestore();
+export const storage = getStorage();
