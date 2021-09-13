@@ -21,10 +21,17 @@ function App() {
       setInit(true);
     });
   }, []);
+  const refreshUser = () => {
+    setUserObject(authService.currentUser);
+  };
   return (
     <>
       {init ? (
-        <AppRouter isLogin={isLogin} userObj={userObject} />
+        <AppRouter
+          refreshUser={refreshUser}
+          isLogin={isLogin}
+          userObj={userObject}
+        />
       ) : (
         "initalization"
       )}

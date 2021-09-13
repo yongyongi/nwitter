@@ -10,12 +10,13 @@ import {
   orderBy,
 } from "firebase/firestore";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 const Home = ({ userObj }) => {
+  const inputAttachment = useRef();
   const [nweet, setNweet] = useState("");
   const [nweets, setNweets] = useState([]);
-  const [attachment, setAttachment] = useState();
+  const [attachment, setAttachment] = useState("");
   // 데이터 실시간 조회
   useEffect(() => {
     // const querySnapshot = await getDocs(collection(db, "nweets"));
@@ -52,15 +53,17 @@ const Home = ({ userObj }) => {
 
   // 데이터 생성
   const onSubmit = async (e) => {
+    e.preventDefault();
     let attachmentUrl = "";
     if (attachment !== "") {
-      e.preventDefault();
       //파일 경로 참조 만들기
       const fileRef = ref(storage, `${userObj.uid}/${uuidv4()}`);
       //storage 참조 경로로 파일 업로드 하기
       const uploadFile = await uploadString(fileRef, attachment, "data_url");
+      console.log(uploadFile);
       //storage에 있는 파일 URL로 다운로드 받기
       attachmentUrl = await getDownloadURL(uploadFile.ref);
+      inputAttachment.current.value = null;
     }
 
     //트윗할때, 메시지와 사진도 같이 firestore에 생성
@@ -89,7 +92,10 @@ const Home = ({ userObj }) => {
     };
     reader.readAsDataURL(theFile);
   };
-  const onClearAttachment = () => setAttachment(null);
+  const onClearAttachment = () => {
+    setAttachment("");
+    inputAttachment.current.value = null;
+  };
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -100,7 +106,12 @@ const Home = ({ userObj }) => {
           placeholder="What's on your mind?"
           maxLength={120}
         />
-        <input onChange={onFileChange} type="file" accept="image/*" />
+        <input
+          ref={inputAttachment}
+          onChange={onFileChange}
+          type="file"
+          accept="image/*"
+        />
         <input type="submit" value="Nweet" />
         {attachment && (
           <div>
