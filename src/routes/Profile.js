@@ -21,9 +21,7 @@ const Profile = ({ refreshUser, userObj }) => {
       where("creatorId", "==", userObj.uid)
     );
     const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      console.log(doc.data());
-    });
+    querySnapshot.forEach((doc) => {});
   };
   useEffect(() => {
     getMyNweets();
@@ -38,7 +36,10 @@ const Profile = ({ refreshUser, userObj }) => {
   };
 
   const onChange = (e) => {
-    setNewDisplayName(e.target.value);
+    const {
+      target: { value },
+    } = e;
+    setNewDisplayName(value);
   };
 
   return (
