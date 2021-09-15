@@ -8,7 +8,7 @@ const Profile = ({ refreshUser, userObj }) => {
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   const history = useHistory();
 
-  const logoutClick = async () => {
+  const onLogOutClick = async () => {
     await signOut(authService);
     history.push("/");
   };
@@ -43,18 +43,21 @@ const Profile = ({ refreshUser, userObj }) => {
   };
 
   return (
-    <>
-      <form onSubmit={onSubmit}>
+    <div className="container">
+      <form onSubmit={onSubmit} className="profileForm">
         <input
           onChange={onChange}
           type="text"
           placeholder="Display name"
           value={newDisplayName}
+          className="formInput"
         />
-        <input type="submit" value="Update Profile" />
+        <input type="submit" value="Update Profile" className="formBtn" />
       </form>
-      <button onClick={logoutClick}>Log Out</button>
-    </>
+      <span className="formBtn cancelBtn logOut" onClick={onLogOutClick}>
+        Log Out
+      </span>
+    </div>
   );
 };
 export default Profile;

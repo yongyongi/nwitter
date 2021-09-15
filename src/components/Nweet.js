@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db, storage } from "fbase";
 import { deleteObject, ref } from "firebase/storage";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Nweet = ({ nweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -33,23 +35,27 @@ const Nweet = ({ nweetObj, isOwner }) => {
     setNewNweet(value);
   };
   return (
-    <div>
+    <div className="nweet">
       {editing ? (
         <>
           {isOwner && ( //보안을 높이려고 설정.
             <>
-              <form>
+              <form onSubmit={onSubmit} className="container nweetEdit">
                 <input
                   type="text"
                   placeholder="Edit your nweet"
                   value={newNweet}
                   required
+                  autoFocus
                   onChange={onChange}
+                  className="formInput"
                 />
                 {/* <button onClick={onSubmit}>Edit</button> */}
-                <input onClick={onSubmit} type="submit" value="Update Nweet" />
+                <input type="submit" value="Update Nweet" className="formBtn" />
               </form>
-              <button onClick={toggleEditing}>Cancel</button>
+              <span className="formBtn cancelBtn" onClick={toggleEditing}>
+                Cancel
+              </span>
               {/* <button onClick={onSubmit}>Edit</button> 같은 form안에 넣어주면 enter키를 눌러도 제출이 된다.
             submit이 필요한 경우에는 input 아닐 경우에 button을 사용해도 상관없을 것 같다.
           */}
@@ -58,17 +64,19 @@ const Nweet = ({ nweetObj, isOwner }) => {
         </>
       ) : (
         <>
-          {nweetObj.attachmentUrl && (
-            <img src={nweetObj.attachmentUrl} width="500px" />
-          )}
           <h4>{nweetObj.nweet}</h4>
+          {nweetObj.attachmentUrl && <img src={nweetObj.attachmentUrl} />}
 
           {/* 내가 쓴 댓글만 삭제,수정 버튼 만들기 */}
           {isOwner && (
-            <>
-              <button onClick={onDeleteClick}>Delete Nweet</button>
-              <button onClick={toggleEditing}>Edit Nweet</button>
-            </>
+            <div className="nweet__actions">
+              <span onClick={onDeleteClick}>
+                <FontAwesomeIcon icon={faTrash} />
+              </span>
+              <span onClick={toggleEditing}>
+                <FontAwesomeIcon icon={faPencilAlt} />
+              </span>
+            </div>
           )}
         </>
       )}
