@@ -31,7 +31,7 @@ const NweetFactory = ({ userObj }) => {
       const fileRef = ref(storage, `${userObj.uid}/${uuidv4()}`);
       //storage 참조 경로로 파일 업로드 하기
       const uploadFile = await uploadString(fileRef, attachment, "data_url");
-      console.log(uploadFile);
+
       //storage에 있는 파일 URL로 다운로드 받기
       attachmentUrl = await getDownloadURL(uploadFile.ref);
       inputAttachment.current.value = null;

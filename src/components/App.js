@@ -35,7 +35,7 @@ function App() {
       },
     });
     // setUserObject({ ...userObject }); //이렇게 해도된다.
-    console.log(userObject);
+
     setUserObject(userObject);
   };
   return (

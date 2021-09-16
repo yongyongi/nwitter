@@ -8,7 +8,7 @@ import Navigation from "components/Navigation";
 
 const AppRouter = ({ refreshUser, isLogin, userObj }) => {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       {
         isLogin && (
           <Navigation userObj={userObj} />
