@@ -78,7 +78,7 @@ const NweetFactory = ({ userObj }) => {
           placeholder="What's on your mind?"
           maxLength={120}
         />
-        <input className="factoryInput__arrow" type="submit" value="Nweet" />
+        <input className="factoryInput__arrow" type="submit" value="&rarr;" />
       </div>
       <label htmlFor="attach-file" className="factoryInput__label">
         <span>Add photos</span>
