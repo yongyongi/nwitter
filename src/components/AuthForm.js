@@ -27,18 +27,10 @@ const AuthForm = () => {
     try {
       if (newAccount) {
         //create Id
-        const data = await createUserWithEmailAndPassword(
-          authService,
-          email,
-          password
-        );
+        await createUserWithEmailAndPassword(authService, email, password);
       } else {
         //log in
-        const data = await signInWithEmailAndPassword(
-          authService,
-          email,
-          password
-        );
+        await signInWithEmailAndPassword(authService, email, password);
       }
     } catch (err) {
       setError(err.message);

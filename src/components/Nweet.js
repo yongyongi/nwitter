@@ -14,7 +14,8 @@ const Nweet = ({ nweetObj, isOwner }) => {
     if (ok) {
       // 데이터 삭제
       await deleteDoc(doc(db, `nweets/${nweetObj.id}`)); // 컬렉션/문서
-      await deleteObject(ref(storage, nweetObj.attachmentUrl));
+      if (nweetObj.attachmentUrl)
+        await deleteObject(ref(storage, nweetObj.attachmentUrl));
     }
   };
   const toggleEditing = () => {

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { signOut, authService, db } from "fbase";
+import React, { useState } from "react";
+import { signOut, authService } from "fbase";
 import { useHistory } from "react-router-dom";
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
 
 const Profile = ({ refreshUser, userObj }) => {
@@ -13,19 +12,18 @@ const Profile = ({ refreshUser, userObj }) => {
     history.push("/");
   };
 
-  const getMyNweets = async () => {
-    //데이터베이스에서 내 nweet만 불러오기
-    const q = query(
-      collection(db, "nweets"),
-      orderBy("createdAt", "desc"),
-      where("creatorId", "==", userObj.uid)
-    );
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {});
-  };
-  useEffect(() => {
-    getMyNweets();
-  });
+  //   //데이터베이스에서 내 nweet만 불러오기
+  // const getMyNweets = async () => {
+  //   const q = query(
+  //     collection(db, "nweets"),
+  //     orderBy("createdAt", "desc"),
+  //     where("creatorId", "==", userObj.uid)
+  //   );
+  //   const querySnapshot = await getDocs(q);
+  // };
+  // useEffect(() => {
+  //   getMyNweets();
+  // });
 
   const onSubmit = async (e) => {
     e.preventDefault();
