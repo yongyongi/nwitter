@@ -2,6 +2,8 @@
 
 react와 firebase를 사용한 twitter 클론코딩
 
+배포 주소 : https://yongyongi.github.io/nwitter/
+
 ## Stack
 
 - JavaScirpt
