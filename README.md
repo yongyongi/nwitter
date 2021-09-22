@@ -4,9 +4,11 @@ react와 firebase를 사용한 twitter 클론코딩
 
 ## Stack
 
-javaScirpt, react, firebase
+- JavaScirpt
+- React
+- Firebase
 
-## firebase
+## 1. Firebase
 
 - [firestore CRUD](https://www.notion.so/firestore-CRUD-5724244025054bcc96eab4ce9f12d33f)
 
@@ -14,13 +16,13 @@ javaScirpt, react, firebase
 
 - [API key 보안 강도 높이기](https://www.notion.so/API-key-b9f4faf3951244309ad5a5346c86a2b5)
 
-## error
+## 2. Error
 
 - [배포 후, css 차이 에러](https://www.notion.so/css-d55d56e3b42b4dce8a91c562b19a501c)
 
 - [BrowserRouter를 사용하였을때, 배포 후 화면출력이 안되는 에러](https://www.notion.so/BrowserRouter-93e8770bd8364c22b6c616381663a68a)
 
-## etc
+## 3. Etc
 
 - [label 태그](https://www.notion.so/label-a2e6607d478843e18e5211d6edc6659c)
 
